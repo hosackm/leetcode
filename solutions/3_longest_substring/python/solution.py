@@ -12,9 +12,6 @@ class Solution:
         longest = 1  # longest has to be at least 1
         for c in s:
             if c in cache:  # we've reached a repeating character
-                if len(cache) > longest:
-                    longest = len(cache)
-
                 # remove all characters leading to and including repeating character
                 removes = order[:order.index(c)+1]
                 for r in removes:
@@ -25,8 +22,12 @@ class Solution:
             cache.add(c)
             order.append(c)
 
+            # check if we're at our longest and store the length
+            if len(cache) > longest:
+                    longest = len(cache)
+
         # check if the cache didn't end with a longer substring
-        return max(longest, len(cache))
+        return longest
 
 
 if __name__ == "__main__":
